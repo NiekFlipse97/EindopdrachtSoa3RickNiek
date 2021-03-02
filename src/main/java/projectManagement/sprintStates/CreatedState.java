@@ -1,9 +1,18 @@
-package sprintStates;
+package projectManagement.sprintStates;
+
+import projectManagement.Sprint;
 
 public class CreatedState extends AbstractSprintState {
 
-    void startSprint() {
+    Sprint sprint;
 
+    public CreatedState(Sprint sprint) {
+        this.sprint = sprint;
+    }
+
+    @Override
+    public void startSprint() {
+        sprint.setState(sprint.getInProgressState());
     }
 
 }

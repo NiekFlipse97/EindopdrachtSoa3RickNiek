@@ -1,24 +1,24 @@
-package sprintStates;
+package projectManagement.sprintStates;
 
 public class AbstractSprintState {
 
-    void startSprint() {
+    public void startSprint() {
         throw new UnsupportedOperationException();
     }
 
-    void toFinishedState() {
+    public void toFinishedState() {
         throw new UnsupportedOperationException();
     }
 
-    void toReviewState() {
+    public void toReviewState() {
         throw new UnsupportedOperationException();
     }
 
-    void toReleaseState() {
+    public void toReleaseState() {
         throw new UnsupportedOperationException();
     }
 
-    void startPipeline() {
+    public void startPipeline() {
         throw new UnsupportedOperationException();
     }
 
