@@ -2,13 +2,34 @@ import devops.Pipeline;
 import devops.PipelineBlock;
 import devops.PipelineComponent;
 import devops.PipelineLeaf;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PipelineTest {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
+
+//    @BeforeEach
+//    public void setUpStreams() {
+//        System.setOut(new PrintStream(outContent));
+//        System.setErr(new PrintStream(errContent));
+//    }
+//
+//    @AfterEach
+//    public void restoreStreams() {
+//        System.setOut(originalOut);
+//        System.setErr(originalErr);
+//    }
+
     @Test
+    @DisplayName("Run Pipeline Test")
     public void runPipelineTest() {
         // Arrange
         PipelineComponent sources = new PipelineBlock("GITHUB", "Pull code from repository");
@@ -24,16 +45,22 @@ public class PipelineTest {
         allComponents.add(test);
 
         packages.add(new PipelineLeaf("NuGet JsonDeserializer", "Deserializer for json from nuget"));
-        packages.add(new PipelineLeaf("NuGet AutoMapper", "AutoMap user input to and object"));
+        packages.add(new PipelineLeaf("NuGet AutoMapper", "AutoMap user input to an object"));
         packages.add(new PipelineLeaf("NuGet Entity Framework", "Code first database creation through Entity Framework"));
 
         Pipeline pipeline = new Pipeline(allComponents);
+        String titleString = "PIPELINE";
+        String leafString = "AutoMap user input to an object";
 
         // Act
         pipeline.runPipeline();
 
         // Assert
         assertEquals(3,3);
+//        String content = outContent.toString().trim();
+//        System.out.println(content);
+//        assertTrue(content.contains(titleString.trim()));
+//        assertTrue(content.contains(leafString.trim()));
     }
 
 
