@@ -3,22 +3,14 @@ package users;
 import notifiers.INotifier;
 import observers.DeveloperObserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Developer {
+public class Developer extends AbstractUser{
     private List<INotifier> notifiers;
 
     public Developer(DeveloperObserver observer) {
+        notifiers = new ArrayList<>();
         observer.addUser(this);
-    }
-
-    public void addNotifier(INotifier notifier) {
-        notifiers.add(notifier);
-    }
-
-    public void notify(String message) {
-        for (int i = 0; i < notifiers.size(); i++) {
-            notifiers.get(i).notify(message);
-        }
     }
 }
