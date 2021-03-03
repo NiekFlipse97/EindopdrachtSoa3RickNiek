@@ -1,6 +1,6 @@
 package discussionThreads;
 
-public class FormComponent {
+public abstract class FormComponent {
     public void add(FormComponent formComponent) {
         throw new UnsupportedOperationException();
     }

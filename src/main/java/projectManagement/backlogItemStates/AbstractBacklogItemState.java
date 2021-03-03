@@ -1,6 +1,6 @@
 package projectManagement.backlogItemStates;
 
-public class AbstractBacklogItemState {
+public abstract class AbstractBacklogItemState {
     public void moveItemToTodo() {
         throw new UnsupportedOperationException();
     }

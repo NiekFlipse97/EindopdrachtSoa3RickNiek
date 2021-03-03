@@ -1,6 +1,6 @@
 package projectManagement.sprintStates;
 
-public class AbstractSprintState {
+public abstract class AbstractSprintState {
 
     public void startSprint() {
         throw new UnsupportedOperationException();
