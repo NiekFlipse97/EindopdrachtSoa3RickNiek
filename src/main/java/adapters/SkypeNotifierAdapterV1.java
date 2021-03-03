@@ -1,6 +1,6 @@
 package adapters;
 
-import externalPseudoLibraries.SkypeNotifierV1;
+import externalpseudolibraries.SkypeNotifierV1;
 
 public class SkypeNotifierAdapterV1 implements INotifierAdapter{
     private String newMessage = "Skype V1: ";

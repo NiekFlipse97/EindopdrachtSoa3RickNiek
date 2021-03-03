@@ -2,12 +2,13 @@ package users;
 
 import notifiers.INotifier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractUser {
 
-    public String name;
-    public List<INotifier> notifiers;
+    private String name;
+    private List<INotifier> notifiers = new ArrayList<>();
 
     public void addNotifier(INotifier notifier) {
         notifiers.add(notifier);
@@ -23,4 +24,7 @@ public abstract class AbstractUser {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -1,6 +1,6 @@
 package adapters;
 
-import externalPseudoLibraries.MailNotifierV1;
+import externalpseudolibraries.MailNotifierV1;
 
 public class MailNotifierAdapterV1 implements INotifierAdapter{
     private String newMessage = "Mail V1: ";

@@ -1,6 +1,6 @@
 package adapters;
 
-import externalPseudoLibraries.SlackNotifierV2;
+import externalpseudolibraries.SlackNotifierV2;
 
 public class SlackNotifierAdapterV2 implements INotifierAdapter {
     private String newMessage = "Slack V2: ";

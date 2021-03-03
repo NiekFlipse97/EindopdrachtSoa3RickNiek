@@ -1,8 +1,8 @@
 package export;
 
-import export.fileTypes.IExportToFile;
-import export.fileTypes.ToPDF;
-import export.fileTypes.ToPNG;
+import export.filetypes.IExportToFile;
+import export.filetypes.ToPDF;
+import export.filetypes.ToPNG;
 
 public class FileExportFactory {
 
