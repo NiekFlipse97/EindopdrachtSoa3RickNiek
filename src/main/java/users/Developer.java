@@ -6,8 +6,7 @@ import java.util.ArrayList;
 
 public class Developer extends AbstractUser{
     public Developer(DeveloperObserver observer, String name) {
-        this.notifiers = new ArrayList<>();
-        this.name = name;
+        setName(name);
         observer.addUser(this);
     }
 }
