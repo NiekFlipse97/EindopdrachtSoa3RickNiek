@@ -1,6 +1,6 @@
-package externalPseudoLibraries;
+package externalpseudolibraries;
 
-public class SlackNotifierV2 {
+public class MailNotifierV1 {
     public void notify(String message) {
         System.out.println(message);
     }
