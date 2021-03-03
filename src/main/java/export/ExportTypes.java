@@ -1,2 +1,8 @@
-package export;public enum ExportTypes {
+package export;
+
+public enum ExportTypes {
+
+    PDF,
+    PNG
+
 }

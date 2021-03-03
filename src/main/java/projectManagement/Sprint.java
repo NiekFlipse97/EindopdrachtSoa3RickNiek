@@ -1,8 +1,13 @@
 package projectManagement;
 
+import export.*;
 import projectManagement.sprintStates.*;
+import users.AbstractUser;
 
+import javax.xml.stream.FactoryConfigurationError;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Random;
 
 public class Sprint {
 
@@ -14,11 +19,18 @@ public class Sprint {
 
     AbstractSprintState currentState;
 
-    public String name;
+    public String sprintName;
     public LocalDateTime startDate;
     public LocalDateTime endDate;
 
-    public Sprint() {
+    private List<AbstractUser> users;
+    private String businessName;
+    private String projectName;
+    private String version;
+    private int effort;
+    private int burnDownChart;
+
+    public Sprint(int effort, int burnDownChart) {
         createdState = new CreatedState(this);
         inProgressState = new InProgressState(this);
         finishedState = new FinishedState(this);
@@ -26,6 +38,21 @@ public class Sprint {
         releaseState = new ReleaseState(this);
 
         currentState = createdState;
+
+        this.effort = effort;
+        this.burnDownChart = burnDownChart;
+    }
+
+    /**
+     * TODO: BURNDOWN CHART
+     */
+    public void exportReport(ExportTypes exportTypes) {
+        Header header = new Header(businessName, projectName);
+        Footer footer = new Footer(LocalDateTime.now(), version);
+        Report report = new Report(header, users, burnDownChart, effort, footer);
+
+        FileExportFactory fileExportFactory = new FileExportFactory();
+        fileExportFactory.getFileExporter(exportTypes).export(report);
     }
 
     public void startSprint() {
@@ -68,8 +95,8 @@ public class Sprint {
         return currentState;
     }
 
-    public String getName() {
-        return name;
+    public String getSprintName() {
+        return sprintName;
     }
 
     public LocalDateTime getStartDate() {
