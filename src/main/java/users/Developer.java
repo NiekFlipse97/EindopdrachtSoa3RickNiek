@@ -1,30 +1,13 @@
 package users;
 
-import notifiers.INotifier;
 import observers.DeveloperObserver;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Developer {
-    private List<INotifier> notifiers;
-    private String name;
-
+public class Developer extends AbstractUser{
     public Developer(DeveloperObserver observer, String name) {
+        this.notifiers = new ArrayList<>();
         this.name = name;
         observer.addUser(this);
-    }
-
-    public void addNotifier(INotifier notifier) {
-        notifiers.add(notifier);
-    }
-
-    public void notify(String message) {
-        for (int i = 0; i < notifiers.size(); i++) {
-            notifiers.get(i).notify(message);
-        }
-    }
-
-    public String getName() {
-        return this.name;
     }
 }

@@ -1,24 +1,15 @@
 package users;
 
-import notifiers.INotifier;
 import observers.LeadDeveloperObserver;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class LeadDeveloper {
-    private List<INotifier> notifiers;
+public class LeadDeveloper extends AbstractUser{
 
-    public LeadDeveloper(LeadDeveloperObserver observer) {
+    public LeadDeveloper(LeadDeveloperObserver observer, String name) {
+        this.notifiers = new ArrayList<>();
+        this.name = name;
         observer.addUser(this);
     }
 
-    public void addNotifier(INotifier notifier) {
-        notifiers.add(notifier);
-    }
-
-    public void notify(String message) {
-        for (int i = 0; i < notifiers.size(); i++) {
-            notifiers.get(i).notify(message);
-        }
-    }
 }
