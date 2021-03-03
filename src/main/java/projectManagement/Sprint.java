@@ -4,10 +4,8 @@ import export.*;
 import projectManagement.sprintStates.*;
 import users.AbstractUser;
 
-import javax.xml.stream.FactoryConfigurationError;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Random;
 
 public class Sprint {
 
@@ -19,16 +17,16 @@ public class Sprint {
 
     AbstractSprintState currentState;
 
-    public String sprintName;
-    public LocalDateTime startDate;
-    public LocalDateTime endDate;
+    private String sprintName;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
     private List<AbstractUser> users;
     private String businessName;
     private String projectName;
     private String version;
-    private int effort;
-    private int burnDownChart;
+    private final int effort;
+    private final int burnDownChart;
 
     public Sprint(int effort, int burnDownChart) {
         createdState = new CreatedState(this);
@@ -43,9 +41,6 @@ public class Sprint {
         this.burnDownChart = burnDownChart;
     }
 
-    /**
-     * TODO: BURNDOWN CHART
-     */
     public void exportReport(ExportTypes exportTypes) {
         Header header = new Header(businessName, projectName);
         Footer footer = new Footer(LocalDateTime.now(), version);
@@ -53,6 +48,40 @@ public class Sprint {
 
         FileExportFactory fileExportFactory = new FileExportFactory();
         fileExportFactory.getFileExporter(exportTypes).export(report);
+    }
+
+    public void setSprintName(String name) {
+        if (currentState != createdState) return;
+
+        this.sprintName = name;
+    }
+
+    public void setStartDate(LocalDateTime dateTime) {
+        if (currentState != createdState) return;
+
+        this.startDate = dateTime;
+    }
+
+    public void setEndDate(LocalDateTime dateTime) {
+        if (currentState != createdState) return;
+
+        this.endDate = dateTime;
+    }
+
+    public void setUsers(List<AbstractUser> users) {
+        this.users = users;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public void startSprint() {
