@@ -7,8 +7,10 @@ import java.util.List;
 
 public class Developer {
     private List<INotifier> notifiers;
+    private String name;
 
-    public Developer(DeveloperObserver observer) {
+    public Developer(DeveloperObserver observer, String name) {
+        this.name = name;
         observer.addUser(this);
     }
 
@@ -20,5 +22,9 @@ public class Developer {
         for (int i = 0; i < notifiers.size(); i++) {
             notifiers.get(i).notify(message);
         }
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
