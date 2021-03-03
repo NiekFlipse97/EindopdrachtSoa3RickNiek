@@ -1,4 +1,4 @@
-package discussionThreads;
+package discussionthreads;
 
 import java.util.ArrayList;
 import java.util.Iterator;

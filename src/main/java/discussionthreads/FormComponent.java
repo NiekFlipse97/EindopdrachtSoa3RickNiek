@@ -1,4 +1,4 @@
-package discussionThreads;
+package discussionthreads;
 
 public abstract class FormComponent {
     public void add(FormComponent formComponent) {

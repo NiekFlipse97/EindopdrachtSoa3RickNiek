@@ -1,6 +1,6 @@
 package projectmanagement;
 
-import discussionThreads.FormComponent;
+import discussionthreads.FormComponent;
 import projectmanagement.backlogitemstates.*;
 import users.Developer;
 

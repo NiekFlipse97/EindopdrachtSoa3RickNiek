@@ -1,4 +1,4 @@
-package discussionThreads;
+package discussionthreads;
 
 import users.Developer;
 
