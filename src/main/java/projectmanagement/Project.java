@@ -1,4 +1,4 @@
-package projectManagement;
+package projectmanagement;
 
 import users.AbstractUser;
 

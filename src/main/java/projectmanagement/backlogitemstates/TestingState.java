@@ -1,6 +1,6 @@
-package projectManagement.backlogitemstates;
+package projectmanagement.backlogitemstates;
 
-import projectManagement.BacklogItem;
+import projectmanagement.BacklogItem;
 
 public class TestingState extends AbstractBacklogItemState {
     BacklogItem backlogItem;
@@ -11,11 +11,11 @@ public class TestingState extends AbstractBacklogItemState {
 
     @Override
     public void moveItemToTodo() {
-        backlogItem.setState(backlogItem.todoState);
+        backlogItem.setState(backlogItem.getTodoState());
     }
 
     @Override
     public void itemTested() {
-        backlogItem.setState(backlogItem.testedState);
+        backlogItem.setState(backlogItem.getTestedState());
     }
 }

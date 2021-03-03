@@ -1,6 +1,6 @@
-package projectManagement.backlogitemstates;
+package projectmanagement.backlogitemstates;
 
-import projectManagement.BacklogItem;
+import projectmanagement.BacklogItem;
 
 public class TodoState extends AbstractBacklogItemState {
     BacklogItem backlogItem;
@@ -11,6 +11,6 @@ public class TodoState extends AbstractBacklogItemState {
 
     @Override
     public void itemInProgress() {
-        backlogItem.setState(backlogItem.doingState);
+        backlogItem.setState(backlogItem.getDoingState());
     }
 }

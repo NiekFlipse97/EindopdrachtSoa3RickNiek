@@ -1,6 +1,6 @@
-package projectManagement.sprintstates;
+package projectmanagement.sprintstates;
 
-import projectManagement.Sprint;
+import projectmanagement.Sprint;
 
 public class ReleaseState extends AbstractSprintState {
 

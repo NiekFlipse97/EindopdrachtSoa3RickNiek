@@ -1,6 +1,6 @@
-package projectManagement.backlogitemstates;
+package projectmanagement.backlogitemstates;
 
-import projectManagement.BacklogItem;
+import projectmanagement.BacklogItem;
 
 public class TestedState extends AbstractBacklogItemState {
     BacklogItem backlogItem;
@@ -11,6 +11,6 @@ public class TestedState extends AbstractBacklogItemState {
 
     @Override
     public void confirmDoDItem() {
-        backlogItem.setState(backlogItem.doDConfirmationState);
+        backlogItem.setState(backlogItem.getDoDConfirmationState());
     }
 }

@@ -1,4 +1,4 @@
-package projectManagement.backlogitemstates;
+package projectmanagement.backlogitemstates;
 
 public abstract class AbstractBacklogItemState {
     public void moveItemToTodo() {
