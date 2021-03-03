@@ -1,7 +1,7 @@
 package projectManagement;
 
 import discussionThreads.FormComponent;
-import projectManagement.backlogItemStates.*;
+import projectManagement.backlogitemstates.*;
 import users.Developer;
 
 import java.util.List;

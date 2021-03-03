@@ -1,4 +1,4 @@
-package projectManagement.backlogItemStates;
+package projectManagement.backlogitemstates;
 
 import projectManagement.BacklogItem;
 
