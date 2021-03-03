@@ -16,17 +16,17 @@ public class PipelineTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-//    @BeforeEach
-//    public void setUpStreams() {
-//        System.setOut(new PrintStream(outContent));
-//        System.setErr(new PrintStream(errContent));
-//    }
-//
-//    @AfterEach
-//    public void restoreStreams() {
-//        System.setOut(originalOut);
-//        System.setErr(originalErr);
-//    }
+    @BeforeEach
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
+    }
 
     @Test
     @DisplayName("Run Pipeline Test")
@@ -56,11 +56,10 @@ public class PipelineTest {
         pipeline.runPipeline();
 
         // Assert
-        assertEquals(3,3);
-//        String content = outContent.toString().trim();
-//        System.out.println(content);
-//        assertTrue(content.contains(titleString.trim()));
-//        assertTrue(content.contains(leafString.trim()));
+//        assertEquals(3,3);
+        String content = outContent.toString().trim();
+        assertTrue(content.contains(titleString.trim()));
+        assertTrue(content.contains(leafString.trim()));
     }
 
 
