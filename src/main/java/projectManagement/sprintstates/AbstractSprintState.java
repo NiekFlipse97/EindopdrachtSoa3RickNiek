@@ -1,4 +1,4 @@
-package projectManagement.sprintStates;
+package projectManagement.sprintstates;
 
 public abstract class AbstractSprintState {
 

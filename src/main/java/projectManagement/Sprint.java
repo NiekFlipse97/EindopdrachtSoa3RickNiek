@@ -1,7 +1,7 @@
 package projectManagement;
 
 import export.*;
-import projectManagement.sprintStates.*;
+import projectManagement.sprintstates.*;
 import users.AbstractUser;
 
 import java.time.LocalDateTime;
