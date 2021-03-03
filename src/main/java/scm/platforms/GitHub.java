@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class GitHub extends AbstractSCM {
 
     public GitHub() {
-        this.branchList = new ArrayList<>();
+        setBranchList(new ArrayList<>());
     }
-
 }

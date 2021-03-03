@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class AbstractSCM {
 
-    public List<Branch> branchList;
+    private List<Branch> branchList;
 
     public void commit(Branch branch, String message) {
         System.out.println("Committed to branch " + branch.getBranchName() + " , message: " + message);
@@ -27,4 +27,7 @@ public abstract class AbstractSCM {
         System.out.println("Merged " + branch1.getBranchName() + " with " + branch2.getBranchName());
     }
 
+    public void setBranchList(List<Branch> branchList) {
+        this.branchList = branchList;
+    }
 }

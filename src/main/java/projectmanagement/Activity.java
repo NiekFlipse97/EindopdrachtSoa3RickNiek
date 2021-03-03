@@ -22,4 +22,16 @@ public class Activity {
     public Boolean getCompleted() {
         return completed;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Developer getDeveloper() {
+        return developer;
+    }
 }
