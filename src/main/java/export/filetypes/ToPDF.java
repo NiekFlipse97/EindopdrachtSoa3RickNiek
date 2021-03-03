@@ -1,8 +1,8 @@
-package export.fileTypes;
+package export.filetypes;
 
 import export.Report;
 
-public class ToPNG implements IExportToFile {
+public class ToPDF implements IExportToFile {
     @Override
     public void export(Report report) {
 

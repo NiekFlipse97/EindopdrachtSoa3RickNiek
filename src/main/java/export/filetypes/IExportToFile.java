@@ -1,4 +1,4 @@
-package export.fileTypes;
+package export.filetypes;
 
 import export.Report;
 
