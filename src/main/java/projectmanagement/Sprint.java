@@ -3,6 +3,8 @@ package projectmanagement;
 import export.*;
 import projectmanagement.sprintstates.*;
 import users.AbstractUser;
+import users.Developer;
+import users.ScrumMaster;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class Sprint {
     private final int burnDownChart;
     private SprintType sprintType;
     private String summary = null;
+    private ScrumMaster scrumMaster;
 
     public Sprint(int effort, int burnDownChart, SprintType sprintType) {
         createdState = new CreatedState(this);
@@ -112,6 +115,10 @@ public class Sprint {
         this.currentState = state;
     }
 
+    public void setScrumMaster(ScrumMaster scrumMaster) {
+        this.scrumMaster = scrumMaster;
+    }
+
     public AbstractSprintState getInProgressState() {
         return inProgressState;
     }
@@ -150,5 +157,9 @@ public class Sprint {
 
     public SprintType getSprintType() {
         return sprintType;
+    }
+
+    public ScrumMaster getScrumMaster() {
+        return scrumMaster;
     }
 }

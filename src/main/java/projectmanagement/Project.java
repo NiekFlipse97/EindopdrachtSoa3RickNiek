@@ -1,7 +1,9 @@
 package projectmanagement;
 
+import observers.ScrumMasterObserver;
 import users.AbstractUser;
 import users.ProductOwner;
+import users.ScrumMaster;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,11 +23,12 @@ public class Project {
         this.productOwner = productOwner;
     }
 
-    public void addSprint(Sprint sprint, List<AbstractUser> users, String version) {
+    public void addSprint(Sprint sprint, List<AbstractUser> users, String version, ScrumMaster scrumMaster) {
         sprint.setProjectName(projectName);
         sprint.setBusinessName(businessName);
         sprint.setUsers(users);
         sprint.setVersion(version);
+        sprint.setScrumMaster(scrumMaster);
 
         sprints.add(sprint);
     }
