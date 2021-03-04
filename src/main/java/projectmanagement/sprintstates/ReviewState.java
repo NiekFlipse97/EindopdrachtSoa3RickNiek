@@ -12,14 +12,14 @@ public class ReviewState extends AbstractSprintState {
 
     @Override
     public void toReleaseState() {
-        if (sprint.hasSummary()) {
+        if (Boolean.TRUE.equals(sprint.hasSummary())) {
             sprint.setState(sprint.getReleaseState());
         }
     }
 
     @Override
     public void toCanceledState() {
-        if (sprint.hasSummary()) {
+        if (Boolean.TRUE.equals(sprint.hasSummary())) {
             sprint.setState(sprint.getCanceledState());
         }
     }

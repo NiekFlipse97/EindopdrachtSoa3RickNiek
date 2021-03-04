@@ -3,8 +3,6 @@ package projectmanagement.sprintstates;
 import projectmanagement.Sprint;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Locale;
 
 public class InProgressState extends AbstractSprintState {
 
@@ -16,7 +14,7 @@ public class InProgressState extends AbstractSprintState {
 
     @Override
     public void toFinishedState() {
-        if (sprint.allBacklogItemsDone() || LocalDateTime.now().isAfter(sprint.getEndDate())) {
+        if (Boolean.TRUE.equals(sprint.allBacklogItemsDone()) || LocalDateTime.now().isAfter(sprint.getEndDate())) {
             sprint.setState(sprint.getFinishedState());
         }
     }

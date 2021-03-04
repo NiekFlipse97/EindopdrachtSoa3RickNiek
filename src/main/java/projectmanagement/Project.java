@@ -1,6 +1,5 @@
 package projectmanagement;
 
-import observers.ScrumMasterObserver;
 import users.AbstractUser;
 import users.ProductOwner;
 import users.ScrumMaster;
@@ -45,5 +44,9 @@ public class Project {
 
     public void setSprintEndDate(Sprint sprint, LocalDateTime dateTime) {
         sprint.setEndDate(dateTime);
+    }
+
+    public ProductOwner getProductOwner() {
+        return productOwner;
     }
 }

@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PipelineTest {
+class PipelineTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -31,7 +31,7 @@ public class PipelineTest {
 
     @Test
     @DisplayName("Run Pipeline Test")
-    public void runPipelineTest() {
+    void runPipelineTest() {
         // Arrange
         PipelineComponent sources = new PipelineBlock("GITHUB", "Pull code from repository");
         PipelineComponent packages = new PipelineBlock("PACKAGES", "Install packages");

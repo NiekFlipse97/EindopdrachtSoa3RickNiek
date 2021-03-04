@@ -3,7 +3,6 @@ package projectmanagement;
 import export.*;
 import projectmanagement.sprintstates.*;
 import users.AbstractUser;
-import users.Developer;
 import users.ScrumMaster;
 
 import java.time.LocalDateTime;
@@ -71,10 +70,7 @@ public class Sprint {
     }
 
     public Boolean hasSummary() {
-        if (summary != null) {
-            return true;
-        }
-        return false;
+        return summary != null;
     }
 
     public Boolean allBacklogItemsDone() {
