@@ -11,7 +11,7 @@ public class CreatedState extends AbstractSprintState {
     }
 
     @Override
-    public void startSprint() {
+    public void toInProgressState() {
         sprint.setState(sprint.getInProgressState());
     }
 

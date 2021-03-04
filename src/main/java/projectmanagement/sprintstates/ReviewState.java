@@ -10,6 +10,13 @@ public class ReviewState extends AbstractSprintState {
         this.sprint = sprint;
     }
 
+    @Override
+    public void toReleaseState() {
+        sprint.setState(sprint.getReleaseState());
+    }
 
-
+    @Override
+    public void toCanceledState() {
+        sprint.setState(sprint.getCanceledState());
+    }
 }

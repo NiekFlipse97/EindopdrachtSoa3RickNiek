@@ -5,15 +5,16 @@ import projectmanagement.sprintstates.*;
 import users.AbstractUser;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sprint {
-
     AbstractSprintState createdState;
     AbstractSprintState inProgressState;
     AbstractSprintState finishedState;
     AbstractSprintState reviewState;
     AbstractSprintState releaseState;
+    AbstractSprintState canceledState;
 
     AbstractSprintState currentState;
 
@@ -21,24 +22,29 @@ public class Sprint {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    private List<BacklogItem> backlogItems;
     private List<AbstractUser> users;
     private String businessName;
     private String projectName;
     private String version;
     private final int effort;
     private final int burnDownChart;
+    private SprintType sprintType;
 
-    public Sprint(int effort, int burnDownChart) {
+    public Sprint(int effort, int burnDownChart, SprintType sprintType) {
         createdState = new CreatedState(this);
         inProgressState = new InProgressState(this);
         finishedState = new FinishedState(this);
         reviewState = new ReviewState(this);
         releaseState = new ReleaseState(this);
+        canceledState = new CanceledState(this);
 
         currentState = createdState;
 
+        this.backlogItems = new ArrayList<>();
         this.effort = effort;
         this.burnDownChart = burnDownChart;
+        this.sprintType = sprintType;
     }
 
     public void exportReport(ExportTypes exportTypes) {
@@ -84,24 +90,8 @@ public class Sprint {
         this.version = version;
     }
 
-    public void startSprint() {
-        currentState.startSprint();
-    }
-
-    public void toFinishedState() {
-        currentState.toFinishedState();
-    }
-
-    public void toReviewState() {
-        currentState.toReviewState();
-    }
-
     public void setState(AbstractSprintState state) {
         this.currentState = state;
-    }
-
-    public AbstractSprintState getCreatedState() {
-        return createdState;
     }
 
     public AbstractSprintState getInProgressState() {
@@ -120,6 +110,10 @@ public class Sprint {
         return releaseState;
     }
 
+    public AbstractSprintState getCanceledState() {
+        return canceledState;
+    }
+
     public AbstractSprintState getCurrentState() {
         return currentState;
     }
@@ -134,5 +128,13 @@ public class Sprint {
 
     public LocalDateTime getEndDate() {
         return endDate;
+    }
+
+    public SprintType getSprintType() {
+        return sprintType;
+    }
+
+    public void addBacklogItem(BacklogItem item) {
+        backlogItems.add(item);
     }
 }
