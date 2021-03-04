@@ -31,8 +31,8 @@ public class Thread extends FormComponent {
 
     @Override
     public void print() {
-        System.out.println("\n " + getName());
-        System.out.println("Message: " + getDescription());
+        System.out.print("\n" + getName());
+        System.out.println(" - " + getDescription());
 
         Iterator<FormComponent> iterator = formComponentList.iterator();
         while(iterator.hasNext()) {

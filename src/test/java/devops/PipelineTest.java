@@ -57,7 +57,7 @@ class PipelineTest {
         pipeline.runPipeline();
 
         // Assert
-//        assertEquals(3,3);
+//        assertTrue(true);
         String content = outContent.toString().trim();
         assertTrue(content.contains(titleString.trim()));
         assertTrue(content.contains(leafString.trim()));

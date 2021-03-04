@@ -23,7 +23,7 @@ public class Comment extends FormComponent {
 
     @Override
     public void print() {
-        System.out.println("Message by: " + getName());
-        System.out.println("Description: " + getDescription());
+        System.out.print(" ^--- " + getName());
+        System.out.println(" : " + getDescription());
     }
 }
