@@ -1,6 +1,7 @@
 package projectmanagement;
 
 import users.AbstractUser;
+import users.ProductOwner;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,14 +9,16 @@ import java.util.List;
 
 public class Project {
 
+    private ProductOwner productOwner;
     private String businessName;
     private String projectName;
     private List<Sprint> sprints;
 
-    public Project(String projectName, String businessName) {
+    public Project(ProductOwner productOwner, String projectName, String businessName) {
         this.sprints = new ArrayList<>();
         this.projectName = projectName;
         this.businessName = businessName;
+        this.productOwner = productOwner;
     }
 
     public void addSprint(Sprint sprint, List<AbstractUser> users, String version) {
