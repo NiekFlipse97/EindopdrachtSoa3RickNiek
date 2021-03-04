@@ -1,10 +1,7 @@
 package projectmanagement;
 
 import discussionthreads.FormComponent;
-import observers.IObserver;
-import observers.LeadDeveloperObserver;
-import observers.ScrumMasterObserver;
-import observers.TesterObserver;
+import observers.*;
 import projectmanagement.backlogitemstates.*;
 import users.Developer;
 
@@ -25,8 +22,11 @@ public class BacklogItem {
     private Developer developer;
     private List<Activity> activities;
     private List<FormComponent> discussionThreads;
+    private TeamObserver teamObserver;
 
-    public BacklogItem(Developer developer, TesterObserver testerObserver, ScrumMasterObserver scrumMasterObserver, LeadDeveloperObserver leadDeveloperObserver) {
+    private String description;
+
+    public BacklogItem(String description, Developer developer, TesterObserver testerObserver, ScrumMasterObserver scrumMasterObserver, LeadDeveloperObserver leadDeveloperObserver, TeamObserver teamObserver) {
         this.todoState = new TodoState(this);
         this.doingState = new DoingState(this);
         this.readyForTestState = new ReadyForTestState(this);
@@ -40,6 +40,8 @@ public class BacklogItem {
         this.testedState.registerObserver(leadDeveloperObserver);
 
         this.developer = developer;
+        this.teamObserver = teamObserver;
+        this.description = description;
         this.activities = new ArrayList<>();
         this.discussionThreads = new ArrayList<>();
     }
@@ -60,6 +62,7 @@ public class BacklogItem {
     public void addFormComponent(FormComponent formComponent) {
         if (currentState != doneState) {
             discussionThreads.add(formComponent);
+            teamObserver.update("There is a new message created for BacklogItem " + this.description);
         }
     }
 
