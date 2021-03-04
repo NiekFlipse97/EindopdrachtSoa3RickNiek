@@ -3,17 +3,20 @@ package projectmanagement;
 import export.*;
 import projectmanagement.sprintstates.*;
 import users.AbstractUser;
+import users.Developer;
+import users.ScrumMaster;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sprint {
-
     AbstractSprintState createdState;
     AbstractSprintState inProgressState;
     AbstractSprintState finishedState;
     AbstractSprintState reviewState;
     AbstractSprintState releaseState;
+    AbstractSprintState canceledState;
 
     AbstractSprintState currentState;
 
@@ -21,24 +24,31 @@ public class Sprint {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    private List<BacklogItem> backlogItems;
     private List<AbstractUser> users;
     private String businessName;
     private String projectName;
     private String version;
     private final int effort;
     private final int burnDownChart;
+    private SprintType sprintType;
+    private String summary = null;
+    private ScrumMaster scrumMaster;
 
-    public Sprint(int effort, int burnDownChart) {
+    public Sprint(int effort, int burnDownChart, SprintType sprintType) {
         createdState = new CreatedState(this);
         inProgressState = new InProgressState(this);
         finishedState = new FinishedState(this);
         reviewState = new ReviewState(this);
         releaseState = new ReleaseState(this);
+        canceledState = new CanceledState(this);
 
         currentState = createdState;
 
+        this.backlogItems = new ArrayList<>();
         this.effort = effort;
         this.burnDownChart = burnDownChart;
+        this.sprintType = sprintType;
     }
 
     public void exportReport(ExportTypes exportTypes) {
@@ -48,6 +58,32 @@ public class Sprint {
 
         FileExportFactory fileExportFactory = new FileExportFactory();
         fileExportFactory.getFileExporter(exportTypes).export(report);
+    }
+
+    public void addBacklogItem(BacklogItem item) {
+        if (currentState != createdState) return;
+
+        backlogItems.add(item);
+    }
+
+    public void addSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public Boolean hasSummary() {
+        if (summary != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public Boolean allBacklogItemsDone() {
+        for (BacklogItem backlogItem : backlogItems) {
+            if (backlogItem.getCurrentState() != backlogItem.getDoneState()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void setSprintName(String name) {
@@ -84,24 +120,12 @@ public class Sprint {
         this.version = version;
     }
 
-    public void startSprint() {
-        currentState.startSprint();
-    }
-
-    public void toFinishedState() {
-        currentState.toFinishedState();
-    }
-
-    public void toReviewState() {
-        currentState.toReviewState();
-    }
-
     public void setState(AbstractSprintState state) {
         this.currentState = state;
     }
 
-    public AbstractSprintState getCreatedState() {
-        return createdState;
+    public void setScrumMaster(ScrumMaster scrumMaster) {
+        this.scrumMaster = scrumMaster;
     }
 
     public AbstractSprintState getInProgressState() {
@@ -120,6 +144,10 @@ public class Sprint {
         return releaseState;
     }
 
+    public AbstractSprintState getCanceledState() {
+        return canceledState;
+    }
+
     public AbstractSprintState getCurrentState() {
         return currentState;
     }
@@ -134,5 +162,13 @@ public class Sprint {
 
     public LocalDateTime getEndDate() {
         return endDate;
+    }
+
+    public SprintType getSprintType() {
+        return sprintType;
+    }
+
+    public ScrumMaster getScrumMaster() {
+        return scrumMaster;
     }
 }

@@ -1,7 +1,14 @@
 package projectmanagement.backlogitemstates;
 
-public abstract class AbstractBacklogItemState {
-    public void moveItemToTodo() {
+import observers.IObservable;
+import observers.IObserver;
+
+import java.util.List;
+
+public abstract class AbstractBacklogItemState implements IObservable {
+    List<IObserver> observers;
+
+    public void itemTodo() {
         throw new UnsupportedOperationException();
     }
 
@@ -13,7 +20,7 @@ public abstract class AbstractBacklogItemState {
         throw new UnsupportedOperationException();
     }
 
-    public void testingItem() {
+    public void itemTesting() {
         throw new UnsupportedOperationException();
     }
 
@@ -21,11 +28,28 @@ public abstract class AbstractBacklogItemState {
         throw new UnsupportedOperationException();
     }
 
-    public void confirmDoDItem() {
+    public void itemConfirmDoD() {
         throw new UnsupportedOperationException();
     }
 
     public void itemDone() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void registerObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(String message) {
+        for (int i = 0; i < observers.size(); i++) {
+            observers.get(i).update(message);
+        }
     }
 }

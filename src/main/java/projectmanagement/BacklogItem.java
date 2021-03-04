@@ -1,29 +1,54 @@
 package projectmanagement;
 
 import discussionthreads.FormComponent;
+import observers.*;
 import projectmanagement.backlogitemstates.*;
 import users.Developer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BacklogItem {
-    private AbstractBacklogItemState todoState = new TodoState(this);
-    private AbstractBacklogItemState doingState = new DoingState(this);
-    private AbstractBacklogItemState readyForTestState = new ReadyForTestState(this);
-    private AbstractBacklogItemState testingState = new TestingState(this);
-    private AbstractBacklogItemState testedState = new TestedState(this);
-    private AbstractBacklogItemState doDConfirmationState = new DoDConfirmationState(this);
-    private AbstractBacklogItemState doneState = new DoneState(this);
+    private AbstractBacklogItemState todoState;
+    private AbstractBacklogItemState doingState;
+    private AbstractBacklogItemState readyForTestState;
+    private AbstractBacklogItemState testingState;
+    private AbstractBacklogItemState testedState;
+    private AbstractBacklogItemState doDConfirmationState;
+    private AbstractBacklogItemState doneState;
 
     private AbstractBacklogItemState currentState = todoState;
 
     private Developer developer;
     private List<Activity> activities;
     private List<FormComponent> discussionThreads;
+    private TeamObserver teamObserver;
+
+    private String description;
+
+    public BacklogItem(String description, Developer developer, TesterObserver testerObserver, ScrumMasterObserver scrumMasterObserver, LeadDeveloperObserver leadDeveloperObserver, TeamObserver teamObserver) {
+        this.todoState = new TodoState(this);
+        this.doingState = new DoingState(this);
+        this.readyForTestState = new ReadyForTestState(this);
+        this.testingState = new TestingState(this);
+        this.testedState = new TestedState(this);
+        this.doDConfirmationState = new DoDConfirmationState(this);
+        this.doneState = new DoneState(this);
+
+        this.readyForTestState.registerObserver(testerObserver);
+        this.todoState.registerObserver(scrumMasterObserver);
+        this.testedState.registerObserver(leadDeveloperObserver);
+
+        this.developer = developer;
+        this.teamObserver = teamObserver;
+        this.description = description;
+        this.activities = new ArrayList<>();
+        this.discussionThreads = new ArrayList<>();
+    }
 
     public boolean areActivitiesDone() {
-        for(int i = 0; i < activities.size(); i++) {
-            if (Boolean.FALSE.equals(activities.get(i).getCompleted())) {
+        for (Activity activity : activities) {
+            if (Boolean.FALSE.equals(activity.getCompleted())) {
                 return false;
             }
         }
@@ -35,7 +60,10 @@ public class BacklogItem {
     }
 
     public void addFormComponent(FormComponent formComponent) {
-        discussionThreads.add(formComponent);
+        if (currentState != doneState) {
+            discussionThreads.add(formComponent);
+            teamObserver.update("There is a new message created for BacklogItem " + this.description);
+        }
     }
 
     public AbstractBacklogItemState getTodoState() {
@@ -76,6 +104,10 @@ public class BacklogItem {
 
     public List<Activity> getActivities() {
         return activities;
+    }
+
+    public void addActivity(Activity activity) {
+        activities.add(activity);
     }
 
     public List<FormComponent> getDiscussionThreads() {

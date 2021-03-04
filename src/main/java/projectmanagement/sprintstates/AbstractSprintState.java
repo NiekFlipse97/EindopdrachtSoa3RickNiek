@@ -2,7 +2,7 @@ package projectmanagement.sprintstates;
 
 public abstract class AbstractSprintState {
 
-    public void startSprint() {
+    public void toInProgressState() {
         throw new UnsupportedOperationException();
     }
 
@@ -15,6 +15,10 @@ public abstract class AbstractSprintState {
     }
 
     public void toReleaseState() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void toCanceledState() {
         throw new UnsupportedOperationException();
     }
 

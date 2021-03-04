@@ -2,11 +2,14 @@ package projectmanagement.backlogitemstates;
 
 import projectmanagement.BacklogItem;
 
+import java.util.ArrayList;
+
 public class DoDConfirmationState extends AbstractBacklogItemState {
     BacklogItem backlogItem;
 
     public DoDConfirmationState(BacklogItem backlogItem) {
         this.backlogItem = backlogItem;
+        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -16,6 +19,8 @@ public class DoDConfirmationState extends AbstractBacklogItemState {
 
     @Override
     public void itemDone() {
-        backlogItem.setState(backlogItem.getDoneState());
+        if (backlogItem.areActivitiesDone()) {
+            backlogItem.setState(backlogItem.getDoneState());
+        }
     }
 }

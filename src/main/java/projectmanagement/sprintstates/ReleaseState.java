@@ -10,9 +10,6 @@ public class ReleaseState extends AbstractSprintState {
         this.sprint = sprint;
     }
 
-    /**
-     * TODO: reference to pipeline.
-     */
     @Override
     public void startPipeline() {
         System.out.println("Start Pipeline");
