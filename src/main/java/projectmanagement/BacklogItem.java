@@ -58,7 +58,9 @@ public class BacklogItem {
     }
 
     public void addFormComponent(FormComponent formComponent) {
-        discussionThreads.add(formComponent);
+        if (currentState != doneState) {
+            discussionThreads.add(formComponent);
+        }
     }
 
     public AbstractBacklogItemState getTodoState() {
