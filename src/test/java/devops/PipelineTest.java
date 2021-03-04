@@ -1,13 +1,14 @@
-import devops.Pipeline;
-import devops.PipelineBlock;
-import devops.PipelineComponent;
-import devops.PipelineLeaf;
-import org.junit.jupiter.api.*;
+package devops;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PipelineTest {
 
