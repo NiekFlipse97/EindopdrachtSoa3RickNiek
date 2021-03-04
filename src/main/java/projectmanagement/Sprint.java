@@ -30,6 +30,7 @@ public class Sprint {
     private final int effort;
     private final int burnDownChart;
     private SprintType sprintType;
+    private String summary = null;
 
     public Sprint(int effort, int burnDownChart, SprintType sprintType) {
         createdState = new CreatedState(this);
@@ -60,6 +61,17 @@ public class Sprint {
         if (currentState != createdState) return;
 
         backlogItems.add(item);
+    }
+
+    public void addSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public Boolean hasSummary() {
+        if (summary != null) {
+            return true;
+        }
+        return false;
     }
 
     public void setSprintName(String name) {
