@@ -56,6 +56,12 @@ public class Sprint {
         fileExportFactory.getFileExporter(exportTypes).export(report);
     }
 
+    public void addBacklogItem(BacklogItem item) {
+        if (currentState != createdState) return;
+
+        backlogItems.add(item);
+    }
+
     public void setSprintName(String name) {
         if (currentState != createdState) return;
 
@@ -132,9 +138,5 @@ public class Sprint {
 
     public SprintType getSprintType() {
         return sprintType;
-    }
-
-    public void addBacklogItem(BacklogItem item) {
-        backlogItems.add(item);
     }
 }
