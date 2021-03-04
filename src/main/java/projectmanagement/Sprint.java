@@ -77,6 +77,15 @@ public class Sprint {
         return false;
     }
 
+    public Boolean allBacklogItemsDone() {
+        for (BacklogItem backlogItem : backlogItems) {
+            if (backlogItem.getCurrentState() != backlogItem.getDoneState()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void setSprintName(String name) {
         if (currentState != createdState) return;
 

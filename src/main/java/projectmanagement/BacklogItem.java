@@ -47,8 +47,8 @@ public class BacklogItem {
     }
 
     public boolean areActivitiesDone() {
-        for(int i = 0; i < activities.size(); i++) {
-            if (Boolean.FALSE.equals(activities.get(i).getCompleted())) {
+        for (Activity activity : activities) {
+            if (Boolean.FALSE.equals(activity.getCompleted())) {
                 return false;
             }
         }
