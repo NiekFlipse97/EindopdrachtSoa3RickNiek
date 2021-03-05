@@ -2,10 +2,11 @@ package observers;
 
 import users.Stakeholder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StakeholderObserver implements IObserver {
-    private List<Stakeholder> users;
+    private List<Stakeholder> users = new ArrayList<>();
 
     public void addUser(Stakeholder user) {
         users.add(user);

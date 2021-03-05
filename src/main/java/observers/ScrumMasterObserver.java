@@ -2,10 +2,11 @@ package observers;
 
 import users.ScrumMaster;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScrumMasterObserver implements IObserver {
-    private List<ScrumMaster> users;
+    private List<ScrumMaster> users = new ArrayList<>();
 
     public void addUser(ScrumMaster user) {
         users.add(user);

@@ -2,10 +2,11 @@ package observers;
 
 import users.AbstractUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeamObserver implements IObserver {
-    private List<AbstractUser> users;
+    private List<AbstractUser> users = new ArrayList<>();
 
     public void addUser(AbstractUser user) {
         users.add(user);

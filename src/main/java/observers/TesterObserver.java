@@ -2,10 +2,11 @@ package observers;
 
 import users.Tester;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TesterObserver implements IObserver {
-    private List<Tester> users;
+    private List<Tester> users = new ArrayList<>();
 
     public void addUser(Tester user) {
         users.add(user);

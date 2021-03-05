@@ -2,10 +2,11 @@ package observers;
 
 import users.LeadDeveloper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LeadDeveloperObserver implements IObserver {
-    private List<LeadDeveloper> users;
+    private List<LeadDeveloper> users = new ArrayList<>();
 
     public void addUser(LeadDeveloper user) {
         users.add(user);
