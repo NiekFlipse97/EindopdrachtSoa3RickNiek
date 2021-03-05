@@ -2,10 +2,11 @@ package observers;
 
 import users.Developer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeveloperObserver implements IObserver {
-    private List<Developer> users;
+    private List<Developer> users = new ArrayList<>();
 
     public void addUser(Developer user) {
         users.add(user);

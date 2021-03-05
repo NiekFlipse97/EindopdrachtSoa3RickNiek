@@ -1,5 +1,6 @@
 package projectmanagement;
 
+import discussionthreads.FormComponent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +15,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 public class SprintTest {
 
@@ -299,6 +300,55 @@ public class SprintTest {
         Project project = s.getProject();
         // Assert
         assertNotNull(project);
+    }
+
+    @Test
+    @DisplayName("Variables can be changed in Created state")
+    void variableChangedInCreatedState() {
+        //Arrange
+        BacklogItem bi = mock(BacklogItem.class);
+        LocalDateTime ldt = LocalDateTime.now();
+
+        //Act
+        sprintReview.addBacklogItem(bi);
+        sprintReview.setSprintName("Sprint name");
+        sprintReview.setStartDate(ldt);
+        sprintReview.setEndDate(ldt);
+
+        //Assert
+        assertEquals(bi, sprintReview.getBacklogItems().get(0));
+        assertEquals("Sprint name", sprintReview.getSprintName());
+        assertEquals(ldt, sprintReview.getStartDate());
+        assertEquals(ldt, sprintReview.getEndDate());
+    }
+
+    @Test
+    @DisplayName("Variables cannot be changed outside of Created state")
+    void variableNotChangedOutsideCreatedState() {
+        //Arrange
+        BacklogItem bi = mock(BacklogItem.class);
+        BacklogItem bi2 = mock(BacklogItem.class);
+        LocalDateTime ldt = LocalDateTime.now();
+        LocalDateTime ldt2 = LocalDateTime.of(2999,12,31,23,59,59);
+
+        //Act
+        sprintReview.addBacklogItem(bi);
+        sprintReview.setSprintName("Sprint name");
+        sprintReview.setStartDate(ldt);
+        sprintReview.setEndDate(ldt);
+
+        sprintReview.getCurrentState().toInProgressState();
+
+        sprintReview.addBacklogItem(bi2);
+        sprintReview.setSprintName("Second Sprint name");
+        sprintReview.setStartDate(ldt2);
+        sprintReview.setEndDate(ldt2);
+
+        //Assert
+        assertEquals(bi, sprintReview.getBacklogItems().get(0));
+        assertEquals("Sprint name", sprintReview.getSprintName());
+        assertEquals(ldt, sprintReview.getStartDate());
+        assertEquals(ldt, sprintReview.getEndDate());
     }
 
 }
