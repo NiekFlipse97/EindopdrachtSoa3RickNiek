@@ -1,6 +1,5 @@
 package projectmanagement;
 
-import discussionthreads.FormComponent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +18,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class SprintTest {
 
@@ -124,6 +122,26 @@ public class SprintTest {
 
         //Assert
         assertEquals(sprintReview.getFinishedState(), sprintReview.getCurrentState());
+    }
+
+    @Test
+    @DisplayName("Sprint cannot change state to Finished when both requirements are not met")
+    void dontChangeStateToFinishedIfRequirementsAreNotMet() {
+        //Arrange
+        BacklogItem bi = mock(BacklogItem.class);
+        when(bi.getCurrentState()).thenReturn(mock(DoneState.class));
+        when(bi.getDoneState()).thenReturn(mock(DoneState.class));
+
+        sprintReview.addBacklogItem(bi);
+        sprintReview.setEndDate(LocalDateTime.of(2999,12,31, 23, 59,59));
+
+        sprintReview.getCurrentState().toInProgressState();
+
+        //Act
+        sprintReview.getCurrentState().toFinishedState();
+
+        //Assert
+        assertEquals(sprintReview.getInProgressState(), sprintReview.getCurrentState());
     }
 
     @Test
@@ -380,6 +398,22 @@ public class SprintTest {
         // Assert
         assertEquals(2, size);
         assertNotNull(developers);
+
+    }
+
+    @Test
+    @DisplayName("Test for sprint goals")
+    void sprintGoalsTest() {
+        //Arrange
+        Sprint s1 = new Sprint(1,2,SprintType.REVIEW);
+        Sprint s2 = new Sprint(1,2,SprintType.RELEASE);
+
+        //Act
+
+
+        //Assert
+        assertEquals(SprintType.REVIEW, s1.getSprintType());
+        assertEquals(SprintType.RELEASE, s2.getSprintType());
 
     }
 }
