@@ -5,13 +5,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import projectmanagement.backlogitemstates.DoneState;
+import users.ProductOwner;
+import users.ScrumMaster;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -285,4 +287,18 @@ public class SprintTest {
         //Assert
         assertEquals(sprintReview.getCanceledState(), sprintReview.getCurrentState());
     }
+
+    @Test
+    @DisplayName("Test if a sprint has a Project")
+    void SprintHasAProject() {
+        // Arrange
+        Project p = new Project(mock(ProductOwner.class), "AvansDevops", "Avans");
+        Sprint s = new Sprint(0,0,SprintType.RELEASE);
+        // Act
+        p.addSprint(s, mock(List.class), "v1.0", mock(ScrumMaster.class));
+        Project project = s.getProject();
+        // Assert
+        assertNotNull(project);
+    }
+
 }

@@ -28,6 +28,7 @@ public class Project {
         sprint.setUsers(users);
         sprint.setVersion(version);
         sprint.setScrumMaster(scrumMaster);
+        sprint.setProject(this);
 
         sprints.add(sprint);
     }

@@ -1,5 +1,6 @@
 package discussionthreads;
 
+import observers.TeamObserver;
 import projectmanagement.BacklogItem;
 import users.Developer;
 
@@ -12,13 +13,15 @@ public class Thread extends FormComponent {
     private String name;
     private String description;
     private Developer developer;
+    private TeamObserver teamObserver;
 
     private boolean closed = false;
 
-    public Thread(Developer developer, String name, String description) {
+    public Thread(Developer developer, String name, String description, TeamObserver teamObserver) {
         this.developer = developer;
         this.name = name;
         this.description = description;
+        this.teamObserver = teamObserver;
     }
 
     @Override
@@ -44,6 +47,7 @@ public class Thread extends FormComponent {
     public void add(FormComponent formComponent) {
         if (!closed) {
             this.formComponentList.add(formComponent);
+            teamObserver.update("Comment is placed under thread: " + getName());
         }
     }
 

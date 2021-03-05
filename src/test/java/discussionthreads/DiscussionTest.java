@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import projectmanagement.BacklogItem;
+import users.AbstractUser;
 import users.Developer;
 
 import java.io.ByteArrayOutputStream;
@@ -37,6 +38,7 @@ class DiscussionTest {
     private FormComponent commentStateNiek;
     private Developer rick;
     private Developer niek;
+    private TeamObserver teamObserver;
 
 
     @BeforeEach
@@ -53,10 +55,14 @@ class DiscussionTest {
         niek = mock(Developer.class);
         when(niek.getName()).thenReturn("Niek");
 
+        teamObserver = mock(TeamObserver.class);
+//        teamObserver.addUser(rick);
+//        teamObserver.addUser(niek);
+
         backlogItem = new BacklogItem("BacklogItem", niek, mock(TesterObserver.class), mock(ScrumMasterObserver.class), mock(LeadDeveloperObserver.class), mock(TeamObserver.class));
-        threadNiek = new Thread(niek, "The First Thread", "Null pointer in Main java class");
-        threadRick = new Thread(rick, "The Second Thread", "Can't find the error. pls help");
-        threadNiek1 = new Thread(niek, "The Third Thread", "I can not change state on this backlog item!");
+        threadNiek = new Thread(niek, "The First Thread", "Null pointer in Main java class", teamObserver);
+        threadRick = new Thread(rick, "The Second Thread", "Can't find the error. pls help", mock(TeamObserver.class));
+        threadNiek1 = new Thread(niek, "The Third Thread", "I can not change state on this backlog item!", mock(TeamObserver.class));
 
         commentNullPointer = new Comment(rick, "Your called object is not initialized.");
         commentThreadRick = new Comment(niek, "You missed a semicolon...");
@@ -140,6 +146,19 @@ class DiscussionTest {
         assertTrue(content.contains(threadNiek.getDescription()));
         assertTrue(content.contains(commentNullPointer.getDescription()));
         assertFalse(content.contains(commentAfterDone.getDescription()));
+    }
+
+    @Test
+    @DisplayName("Test if team members get notified when a Comment is placed under a Thread")
+    void TeamMembersGetNotifiedWhenCommentIsPlacedUnderThread() {
+        // Arrange
+        backlogItem.addFormComponent(threadNiek);
+
+        // Act
+        threadNiek.add(commentNullPointer);
+
+        // Assert
+        verify(teamObserver, times(1)).update("Comment is placed under thread: " + threadNiek.getName());
     }
 
 }

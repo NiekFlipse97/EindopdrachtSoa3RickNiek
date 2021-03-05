@@ -33,6 +33,7 @@ public class Sprint {
     private SprintType sprintType;
     private String summary = null;
     private ScrumMaster scrumMaster;
+    private Project project;
 
     public Sprint(int effort, int burnDownChart, SprintType sprintType) {
         createdState = new CreatedState(this);
@@ -58,6 +59,14 @@ public class Sprint {
 
         FileExportFactory fileExportFactory = new FileExportFactory();
         fileExportFactory.getFileExporter(exportTypes).export(report);
+    }
+
+    public Project getProject() {
+        return this.project;
+    }
+
+    public void setProject(Project p) {
+        this.project = p;
     }
 
     public void addBacklogItem(BacklogItem item) {
