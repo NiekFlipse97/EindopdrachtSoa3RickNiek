@@ -22,10 +22,18 @@ public class ProjectTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
+    private Project p;
+    private ProductOwner po;
+    private ScrumMaster sm;
+
     @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
+
+        p = new Project(po, "Test Project", "Test Business Name");
+        po = mock(ProductOwner.class);
+        sm = mock(ScrumMaster.class);
     }
 
     @AfterEach
@@ -38,10 +46,7 @@ public class ProjectTest {
     @DisplayName("Project can contain multiple Sprints")
     void compareSizeOfSprintListInProject() {
         //Arrange
-        ProductOwner po = mock(ProductOwner.class);
-        ScrumMaster sm = mock(ScrumMaster.class);
         ArrayList<AbstractUser> users = mock(ArrayList.class);
-        Project p = new Project(po, "Test Project", "Test Business Name");
         Sprint one = mock(Sprint.class);
         Sprint two = mock(Sprint.class);
         Sprint three = mock(Sprint.class);
@@ -55,5 +60,18 @@ public class ProjectTest {
 
         //Assert
         assertEquals(4, p.getSprints().size());
+    }
+
+    @Test
+    @DisplayName("Test if a project has 1 and only 1 product owner")
+    void projectHasOneProductOwner() {
+        // Arrange
+        p.setProductOwner(po);
+
+        // Act
+        ProductOwner productOwner = p.getProductOwner();
+
+        // Assert
+        assertNotNull(productOwner);
     }
 }

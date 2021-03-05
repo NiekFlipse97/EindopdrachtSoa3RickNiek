@@ -51,6 +51,10 @@ public class Project {
         return productOwner;
     }
 
+    public void setProductOwner(ProductOwner productOwner) {
+        this.productOwner = productOwner;
+    }
+
     public List<Sprint> getSprints() {
         return sprints;
     }
