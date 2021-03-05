@@ -37,6 +37,6 @@ public class Header {
 
     @Override
     public String toString() {
-        return String.format("| %s - %s - %s", businessName, projectName, logo);
+        return String.format("| %s - %s - %s |", businessName, projectName, logo);
     }
 }

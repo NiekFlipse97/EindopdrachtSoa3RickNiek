@@ -52,6 +52,7 @@ public class Sprint {
 
     public void exportReport(ExportTypes exportTypes) {
         Header header = new Header(businessName, projectName);
+        header.setLogo("Logo");
         Footer footer = new Footer(LocalDateTime.now(), version);
         Report report = new Report(header, users, burnDownChart, effort, footer);
 

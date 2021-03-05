@@ -30,7 +30,7 @@ public class Report {
         StringBuilder names = new StringBuilder();
 
         for (AbstractUser user : users) {
-            names.append(String.format("\n %s", user.getName()));
+            names.append(String.format("\n         - %s", user.getName()));
         }
 
         return names.toString();
@@ -50,6 +50,6 @@ public class Report {
 
     @Override
     public String toString() {
-        return "| " + getHeader().toString() + "\n\n" + getUserNames() + "\n" + getBurnDownChart() + "\n" + getEffort() + "\n\n" + getFooter().toString();
+        return getHeader().toString() + "\n" + getUserNames() + "\n         BurnDown: " + getBurnDownChart() + "\n         Effort: " + getEffort() + "\n\n" + getFooter().toString();
     }
 }

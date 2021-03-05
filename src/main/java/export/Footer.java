@@ -30,6 +30,6 @@ public class Footer {
 
     @Override
     public String toString() {
-        return String.format("| %s - %s", dateTime.toString(), version);
+        return String.format("|      %s - %s     |", getDateTime().getChronology().dateNow().toString(), getVersion());
     }
 }
