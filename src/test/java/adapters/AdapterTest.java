@@ -51,8 +51,8 @@ public class AdapterTest {
     }
 
     @Test
-    @DisplayName("Slack Adapter Adapts Slack for PseudoLibrary")
-    void SlackAdapterCalled() {
+    @DisplayName("Slack Adapter V1 Adapts Slack for PseudoLibrary")
+    void SlackAdapterV1Called() {
         //Arrange
 
 
@@ -62,6 +62,20 @@ public class AdapterTest {
         //Assert
         String content = outContent.toString().trim();
         assertTrue(content.contains("Slack V1: Slack Notification"));
+    }
+
+    @Test
+    @DisplayName("Slack Adapter V2 Adapts Slack for PseudoLibrary")
+    void SlackAdapterV2Called() {
+        //Arrange
+
+
+        //Act
+        slackNotifier.notify("Slack Notification");
+
+        //Assert
+        String content = outContent.toString().trim();
+        assertTrue(content.contains("Slack V2: Slack Notification"));
     }
 
     @Test
