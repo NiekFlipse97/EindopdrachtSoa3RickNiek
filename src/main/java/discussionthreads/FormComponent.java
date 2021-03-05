@@ -1,5 +1,7 @@
 package discussionthreads;
 
+import users.Developer;
+
 public abstract class FormComponent {
     public void add(FormComponent formComponent) {
         throw new UnsupportedOperationException();
@@ -14,6 +16,14 @@ public abstract class FormComponent {
     }
 
     public String getDescription() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setClosed(boolean isClosed) {
+        throw new UnsupportedOperationException();
+    }
+
+    public Developer getDeveloper() {
         throw new UnsupportedOperationException();
     }
 
