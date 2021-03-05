@@ -5,6 +5,7 @@ import observers.*;
 import projectmanagement.backlogitemstates.*;
 import users.Developer;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +60,12 @@ public class BacklogItem {
 
     public void setState(AbstractBacklogItemState state) {
         this.currentState = state;
+
+        if(getCurrentState() == getDoneState()) {
+            for (FormComponent component : getDiscussionThreads()) {
+                component.setClosed(true);
+            }
+        }
     }
 
     public void addFormComponent(FormComponent formComponent) {

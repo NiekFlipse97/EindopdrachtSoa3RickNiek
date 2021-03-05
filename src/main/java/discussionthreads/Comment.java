@@ -13,12 +13,17 @@ public class Comment extends FormComponent {
 
     @Override
     public String getName() {
-        return developer.getName();
+        return getDeveloper().getName();
     }
 
     @Override
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public Developer getDeveloper() {
+        return developer;
     }
 
     @Override

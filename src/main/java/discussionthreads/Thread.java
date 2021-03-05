@@ -1,5 +1,6 @@
 package discussionthreads;
 
+import projectmanagement.BacklogItem;
 import users.Developer;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class Thread extends FormComponent {
     private String name;
     private String description;
     private Developer developer;
+
+    private boolean closed = false;
 
     public Thread(Developer developer, String name, String description) {
         this.developer = developer;
@@ -29,14 +32,29 @@ public class Thread extends FormComponent {
     }
 
     @Override
+    public void setClosed(boolean isClosed) {
+        this.closed = isClosed;
+    }
+
+    public boolean getClosed() {
+        return this.closed;
+    }
+
+    @Override
     public void add(FormComponent formComponent) {
-        this.formComponentList.add(formComponent);
+        if (!closed) {
+            this.formComponentList.add(formComponent);
+        }
+    }
+
+    public Developer getDeveloper() {
+        return developer;
     }
 
     @Override
     public void print() {
-        System.out.println("\n-{" + developer.getName() + "}-" );
-        System.out.print("\n" + getName());
+        System.out.println("\n-{" + getDeveloper().getName() + "}-" );
+        System.out.print(getName());
         System.out.println(" - " + getDescription());
 
         Iterator<FormComponent> iterator = formComponentList.iterator();
