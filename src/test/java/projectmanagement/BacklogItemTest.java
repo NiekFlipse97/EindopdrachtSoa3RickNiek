@@ -25,7 +25,6 @@ public class BacklogItemTest {
 
     @BeforeEach
     public void setUpStreams() {
-
         this.backlogItem = new BacklogItem("desc", dev, testerObs, scrumMasterObs, leadDevObs, teamObs);
     }
 
