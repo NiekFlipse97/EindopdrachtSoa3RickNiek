@@ -61,6 +61,10 @@ public class Sprint {
         fileExportFactory.getFileExporter(exportTypes).export(report);
     }
 
+    public List<AbstractUser> getUsers() {
+        return users;
+    }
+
     public Project getProject() {
         return this.project;
     }
