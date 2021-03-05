@@ -304,7 +304,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("Test if a sprint has a Project")
-    void SprintHasAProject() {
+    void sprintHasAProject() {
         // Arrange
         Project p = new Project(mock(ProductOwner.class), "AvansDevops", "Avans");
 
@@ -367,7 +367,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("Test if a sprint has multiple developers")
-    void SprintHasMultipleDevelopers() {
+    void sprintHasMultipleDevelopers() {
         // Arrange
         users.add(rick);
         users.add(niek);
@@ -380,6 +380,16 @@ public class SprintTest {
         // Assert
         assertEquals(2, size);
         assertNotNull(developers);
+    }
 
+    @Test
+    @DisplayName("Test if a sprint has only one scrum master")
+    void sprintHasOnlyOneScrumMaster() {
+        // Arrange
+        sprintReview.setScrumMaster(mock(ScrumMaster.class));
+        // Act
+        ScrumMaster s = sprintReview.getScrumMaster();
+        // Assert
+        assertNotNull(s);
     }
 }
