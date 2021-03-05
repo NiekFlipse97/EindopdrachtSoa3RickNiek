@@ -1,5 +1,7 @@
 package discussionthreads;
 
+import users.Developer;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,8 +10,10 @@ public class Thread extends FormComponent {
     private List<FormComponent> formComponentList = new ArrayList<>();
     private String name;
     private String description;
+    private Developer developer;
 
-    public Thread(String name, String description) {
+    public Thread(Developer developer, String name, String description) {
+        this.developer = developer;
         this.name = name;
         this.description = description;
     }
@@ -31,6 +35,7 @@ public class Thread extends FormComponent {
 
     @Override
     public void print() {
+        System.out.println("\n-{" + developer.getName() + "}-" );
         System.out.print("\n" + getName());
         System.out.println(" - " + getDescription());
 

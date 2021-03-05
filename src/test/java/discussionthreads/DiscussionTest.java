@@ -44,9 +44,9 @@ public class DiscussionTest {
         Developer niek = mock(Developer.class);
         when(niek.getName()).thenReturn("Niek");
 
-        FormComponent thread = new Thread("The First Thread", "Null pointer in Main java class");
-        FormComponent thread1 = new Thread("The Second Thread", "Can't find the error. pls help");
-        FormComponent thread2 = new Thread("The Third Thread", "I can not change state on this backlog item!");
+        FormComponent thread = new Thread(niek, "The First Thread", "Null pointer in Main java class");
+        FormComponent thread1 = new Thread(rick, "The Second Thread", "Can't find the error. pls help");
+        FormComponent thread2 = new Thread(niek, "The Third Thread", "I can not change state on this backlog item!");
         FormComponent comment = new Comment(rick, "The object you called is not initialized");
         FormComponent comment1 = new Comment(niek, "You missed a semicolon...");
         FormComponent comment2 = new Comment(rick, "Have you tried turning it off and on again?");
