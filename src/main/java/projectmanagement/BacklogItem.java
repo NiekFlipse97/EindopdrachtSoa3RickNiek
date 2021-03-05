@@ -5,7 +5,6 @@ import observers.*;
 import projectmanagement.backlogitemstates.*;
 import users.Developer;
 
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class BacklogItem {
     public void addFormComponent(FormComponent formComponent) {
         if (currentState != doneState) {
             discussionThreads.add(formComponent);
-            teamObserver.update("There is a new message created for BacklogItem " + this.description);
+            teamObserver.update("There is a new message created for BacklogItem " + getDescription());
         }
     }
 
@@ -121,5 +120,9 @@ public class BacklogItem {
 
     public List<FormComponent> getDiscussionThreads() {
         return discussionThreads;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
