@@ -1,5 +1,6 @@
 package projectmanagement;
 
+import discussionthreads.FormComponent;
 import observers.LeadDeveloperObserver;
 import observers.ScrumMasterObserver;
 import observers.TeamObserver;
@@ -9,29 +10,22 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import users.Developer;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 public class BacklogItemTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
     private BacklogItem backlogItem;
-
+    private final Developer dev = mock(Developer.class);
+    private final TesterObserver testerObs = mock(TesterObserver.class);
+    private final ScrumMasterObserver scrumMasterObs = mock(ScrumMasterObserver.class);
+    private final LeadDeveloperObserver leadDevObs = mock(LeadDeveloperObserver.class);
+    private final TeamObserver teamObs = mock(TeamObserver.class);
 
     @BeforeEach
     public void setUpStreams() {
-        Developer dev = mock(Developer.class);
-        TesterObserver testerObs = mock(TesterObserver.class);
-        ScrumMasterObserver scrumMasterObs = mock(ScrumMasterObserver.class);
-        LeadDeveloperObserver leadDevObs = mock(LeadDeveloperObserver.class);
-        TeamObserver teamObs = mock(TeamObserver.class);
+
         this.backlogItem = new BacklogItem("desc", dev, testerObs, scrumMasterObs, leadDevObs, teamObs);
     }
 
@@ -186,5 +180,94 @@ public class BacklogItemTest {
         //Assert
         assertEquals(backlogItem.getDoDConfirmationState(), backlogItem.getCurrentState());
 
+    }
+
+    @Test
+    @DisplayName("BacklogItem can have multiple activities")
+    void multipleActivitiesOnBacklogItem() {
+        //Arrange
+        Activity activity = mock(Activity.class);
+        when(activity.getCompleted()).thenReturn(true);
+        backlogItem.addActivity(activity);
+        backlogItem.addActivity(activity);
+        backlogItem.addActivity(activity);
+        backlogItem.addActivity(activity);
+
+        //Act
+
+
+        //Assert
+        assertEquals(4, backlogItem.getActivities().size());
+
+    }
+
+    @Test
+    @DisplayName("BacklogItem can only have 1 Developer")
+    void singleDeveloperOnBacklogItem() {
+        //Arrange
+        Developer dev = backlogItem.getDeveloper();
+
+        //Act
+
+        //Assert
+        assertNotNull(dev);
+    }
+
+    @Test
+    @DisplayName("Notification send to testers when Ready for testing state")
+    void readyForTestingNotificationSendToTesters() {
+        //Arrange
+        backlogItem.getCurrentState().itemInProgress();
+
+        //Act
+        backlogItem.getCurrentState().itemReadyForTest();
+
+        //Assert
+        verify(testerObs, times(1)).update("A BacklogItem is Ready for Testing");
+
+    }
+
+    @Test
+    @DisplayName("Notification send to ScrumMaster when back to todo state")
+    void todoNotificationSendToScrumMaster() {
+        //Arrange
+        backlogItem.getCurrentState().itemInProgress();
+        backlogItem.getCurrentState().itemReadyForTest();
+        backlogItem.getCurrentState().itemTesting();
+
+        //Act
+        backlogItem.getCurrentState().itemTodo();
+
+        //Assert
+        verify(scrumMasterObs, times(1)).update("A BacklogItem has failed testing and set back to Todo State");
+
+    }
+
+    @Test
+    @DisplayName("Notification send to Lead Dev when to tested state")
+    void testedNotificationSendToLeadDev() {
+        //Arrange
+        backlogItem.getCurrentState().itemInProgress();
+        backlogItem.getCurrentState().itemReadyForTest();
+        backlogItem.getCurrentState().itemTesting();
+
+        //Act
+        backlogItem.getCurrentState().itemTested();
+
+        //Assert
+        verify(leadDevObs, times(1)).update("A BacklogItem has been tested is and waiting for a DoD Confirmation");
+
+    }
+
+    @Test
+    @DisplayName("Notification send if discussion is started")
+    void discussionNotificationSendToTeam() {
+        //Arrange
+
+        //Act
+        backlogItem.addFormComponent(mock(FormComponent.class));
+
+        //Assert
+        verify(teamObs, times(1)).update("There is a new message created for BacklogItem " + backlogItem.getDescription());
     }
 }
