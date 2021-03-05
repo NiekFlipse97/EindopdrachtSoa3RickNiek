@@ -125,4 +125,20 @@ public class ObserverTest {
         verify(leadDeveloper, times(1)).notify("Message for LeadDevelopers");
 
     }
+
+    @Test
+    @DisplayName("Team gets notified from its Observer")
+    void teamGetsNotifiedByObserver() {
+        //Arrange
+        Developer developer = mock(Developer.class);
+        TeamObserver teamObserver = new TeamObserver();
+        teamObserver.addUser(developer);
+
+        //Act
+        teamObserver.update("Message for Team");
+
+        //Assert
+        verify(developer, times(1)).notify("Message for Team");
+
+    }
 }
