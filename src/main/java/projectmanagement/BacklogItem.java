@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BacklogItem {
-    private AbstractBacklogItemState todoState;
-    private AbstractBacklogItemState doingState;
-    private AbstractBacklogItemState readyForTestState;
-    private AbstractBacklogItemState testingState;
-    private AbstractBacklogItemState testedState;
-    private AbstractBacklogItemState doDConfirmationState;
-    private AbstractBacklogItemState doneState;
+    AbstractBacklogItemState todoState;
+    AbstractBacklogItemState doingState;
+    AbstractBacklogItemState readyForTestState;
+    AbstractBacklogItemState testingState;
+    AbstractBacklogItemState testedState;
+    AbstractBacklogItemState doDConfirmationState;
+    AbstractBacklogItemState doneState;
 
-    private AbstractBacklogItemState currentState = todoState;
+    private AbstractBacklogItemState currentState;
 
     private Developer developer;
     private List<Activity> activities;
@@ -34,6 +34,8 @@ public class BacklogItem {
         this.testedState = new TestedState(this);
         this.doDConfirmationState = new DoDConfirmationState(this);
         this.doneState = new DoneState(this);
+
+        this.currentState = todoState;
 
         this.readyForTestState.registerObserver(testerObserver);
         this.todoState.registerObserver(scrumMasterObserver);

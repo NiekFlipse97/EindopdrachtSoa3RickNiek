@@ -167,4 +167,8 @@ public class Sprint {
     public ScrumMaster getScrumMaster() {
         return scrumMaster;
     }
+
+    public List<BacklogItem> getBacklogItems() {
+        return backlogItems;
+    }
 }

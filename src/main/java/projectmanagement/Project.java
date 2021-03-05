@@ -49,4 +49,8 @@ public class Project {
     public ProductOwner getProductOwner() {
         return productOwner;
     }
+
+    public List<Sprint> getSprints() {
+        return sprints;
+    }
 }
