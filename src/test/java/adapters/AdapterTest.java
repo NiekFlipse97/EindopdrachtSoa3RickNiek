@@ -1,26 +1,17 @@
 package adapters;
 
-import discussionthreads.Comment;
-import discussionthreads.Thread;
 import notifiers.MailNotifier;
 import notifiers.SkypeNotifier;
 import notifiers.SlackNotifier;
-import observers.LeadDeveloperObserver;
-import observers.ScrumMasterObserver;
-import observers.TeamObserver;
-import observers.TesterObserver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import projectmanagement.BacklogItem;
-import users.Developer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
 
 public class AdapterTest {
 
