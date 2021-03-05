@@ -6,12 +6,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import projectmanagement.backlogitemstates.DoneState;
+import users.AbstractUser;
+import users.Developer;
 import users.ProductOwner;
 import users.ScrumMaster;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,11 +29,21 @@ public class SprintTest {
     private final PrintStream originalErr = System.err;
     private Sprint sprintReview;
     private Sprint sprintRelease;
+    private ArrayList<AbstractUser> users;
+    private Developer rick;
+    private Developer niek;
 
     @BeforeEach
     public void setUpStreams() {
         this.sprintReview = new Sprint(3,5, SprintType.REVIEW);
         this.sprintRelease = new Sprint(3,5, SprintType.RELEASE);
+        users = new ArrayList<>();
+        rick = mock(Developer.class);
+        when(rick.getName()).thenReturn("Rick");
+
+        niek = mock(Developer.class);
+        when(niek.getName()).thenReturn("Niek");
+
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
@@ -294,10 +307,11 @@ public class SprintTest {
     void SprintHasAProject() {
         // Arrange
         Project p = new Project(mock(ProductOwner.class), "AvansDevops", "Avans");
-        Sprint s = new Sprint(0,0,SprintType.RELEASE);
+
         // Act
-        p.addSprint(s, mock(List.class), "v1.0", mock(ScrumMaster.class));
-        Project project = s.getProject();
+        p.addSprint(sprintRelease, mock(List.class), "v1.0", mock(ScrumMaster.class));
+        Project project = sprintRelease.getProject();
+
         // Assert
         assertNotNull(project);
     }
@@ -329,7 +343,7 @@ public class SprintTest {
         BacklogItem bi = mock(BacklogItem.class);
         BacklogItem bi2 = mock(BacklogItem.class);
         LocalDateTime ldt = LocalDateTime.now();
-        LocalDateTime ldt2 = LocalDateTime.of(2999,12,31,23,59,59);
+        LocalDateTime ldt2 = LocalDateTime.of(2999, 12, 31, 23, 59, 59);
 
         //Act
         sprintReview.addBacklogItem(bi);
@@ -351,4 +365,21 @@ public class SprintTest {
         assertEquals(ldt, sprintReview.getEndDate());
     }
 
+    @Test
+    @DisplayName("Test if a sprint has multiple developers")
+    void SprintHasMultipleDevelopers() {
+        // Arrange
+        users.add(rick);
+        users.add(niek);
+        sprintRelease.setUsers(users);
+
+        // Act
+        List<AbstractUser> developers = sprintRelease.getUsers();
+        int size = developers.size();
+
+        // Assert
+        assertEquals(2, size);
+        assertNotNull(developers);
+
+    }
 }
