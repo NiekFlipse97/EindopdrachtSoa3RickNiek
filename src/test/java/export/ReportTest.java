@@ -120,4 +120,16 @@ public class ReportTest {
         assertFalse(content.contains(falsePrefix.trim()));
     }
 
+    @Test
+    @DisplayName("Test if export factory returns null if no export type is given")
+    void ExportFactoryReturnsNullIsNoValidExportTypeIsGiven() {
+        // Arrange
+
+        // Act
+        // Assert
+        assertThrows(NullPointerException.class, () -> {
+            sprint.exportReport(null);
+        });
+    }
+
 }
