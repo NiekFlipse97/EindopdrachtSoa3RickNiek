@@ -86,7 +86,7 @@ class DiscussionTest {
         int size = components.size();
 
         // Assert
-        assertEquals(size, 1);
+        assertEquals(1, size);
         assertEquals(components.get(0).getName(), this.threadNiek.getName());
         assertThrows(IndexOutOfBoundsException.class, () -> {
             components.get(1);

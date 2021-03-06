@@ -1,7 +1,6 @@
 package discussionthreads;
 
 import observers.TeamObserver;
-import projectmanagement.BacklogItem;
 import users.Developer;
 
 import java.util.ArrayList;
@@ -51,6 +50,7 @@ public class Thread extends FormComponent {
         }
     }
 
+    @Override
     public Developer getDeveloper() {
         return developer;
     }

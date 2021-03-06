@@ -7,7 +7,7 @@ import users.Developer;
 
 import static org.mockito.Mockito.*;
 
-public class NotifierTest {
+class NotifierTest {
     private final DeveloperObserver developerObserver = mock(DeveloperObserver.class);
     private final Developer developer = new Developer(developerObserver, "Rick");
     private final MailNotifier mailNotifier = mock(MailNotifier.class);

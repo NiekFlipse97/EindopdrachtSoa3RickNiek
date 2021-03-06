@@ -8,7 +8,7 @@ import users.Developer;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class ActivityTest {
+class ActivityTest {
     private Activity activity;
 
     @BeforeEach

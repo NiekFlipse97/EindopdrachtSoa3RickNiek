@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-public class BacklogItemTest {
+class BacklogItemTest {
 
     private BacklogItem backlogItem;
     private final Developer dev = mock(Developer.class);

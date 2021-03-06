@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ProjectTest {
+class ProjectTest {
 
     private Project p;
     private ProductOwner po;

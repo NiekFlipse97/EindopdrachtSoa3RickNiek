@@ -11,7 +11,7 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.*;
 
-public class ObserverTest {
+class ObserverTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
